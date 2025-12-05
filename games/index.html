@@ -754,3 +754,741 @@ function searchGames() {
 
 </body>
 </html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sawyer's Secret Game Stash</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 1400% 1400%;
+    animation: rainbow 20s ease infinite;
+  }
+
+@keyframes rainbow {
+0% {background-position: 0% 50%;}
+50% {background-position: 100% 50%;}
+100% {background-position: 0% 50%;}
+}
+
+header {
+background: rgba(0,0,0,0.6);
+padding: 20px;
+text-align: center;
+font-size: 2em;
+font-weight: bold;
+letter-spacing: 2px;
+text-shadow: 2px 2px 20px #000;
+}
+
+.search-container {
+text-align: center;
+margin: 20px;
+}
+
+.search-container input {
+width: 80%;
+max-width: 500px;
+padding: 10px;
+border-radius: 8px;
+border: none;
+font-size: 1em;
+}
+
+.container {
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+gap: 20px;
+padding: 20px;
+}
+
+.game-card {
+background: rgba(0,0,0,0.6);
+border: 2px solid #fff;
+border-radius: 12px;
+overflow: hidden;
+text-align: center;
+cursor: pointer;
+transition: transform 0.3s, box-shadow 0.3s;
+box-shadow: 0 4px 10px rgba(255,255,255,0.2);
+}
+
+.game-card:hover {
+transform: scale(1.08);
+box-shadow: 0 0 25px #fff, 0 0 40px #000;
+}
+
+.game-card img {
+width: 100%;
+height: 150px;
+object-fit: cover;
+border-bottom: 2px solid #fff;
+}
+
+.game-card h3 {
+margin: 10px 0;
+}
+
+#gameFrameContainer {
+display: none;
+padding: 20px;
+text-align: center;
+}
+
+#gameFrameContainer iframe {
+width: 90%;
+height: 600px;
+border: none;
+border-radius: 12px;
+box-shadow: 0 0 20px #fff;
+}
+
+#backBtn {
+display: none;
+margin: 20px auto;
+padding: 10px 20px;
+font-size: 1em;
+cursor: pointer;
+background: #ff0055;
+border: none;
+border-radius: 8px;
+color: #fff;
+transition: transform 0.2s;
+}
+
+#backBtn:hover {
+transform: scale(1.05);
+}
+
+footer {
+text-align: center;
+padding: 15px;
+color: #fff;
+font-size: 0.9em;
+border-top: 1px solid #fff;
+text-shadow: 0 0 10px #000;
+} </style>
+
+</head>
+<body>
+
+<header>🎮 Sawyer's Secret Game Stash 🎮</header>
+
+<div class="search-container">
+  <input type="text" id="search" placeholder="Search games..." onkeyup="searchGames()">
+</div>
+
+<!-- Game Selection Page -->
+
+<div class="container" id="gameContainer">
+  <!-- Example Game Cards -->
+  <div class="game-card" onclick="openGame('https://chromedino.com')">
+    <img src="https://chromedino.com/assets/dino.png" alt="Dino Game">
+    <h3>Dino Game</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://flappybird.io')">
+    <img src="https://flappybird.io/flappy-bird.png" alt="Flappy Bird">
+    <h3>Flappy Bird</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://play2048.co')">
+    <img src="https://play2048.co/assets/images/2048-icon.png" alt="2048">
+    <h3>2048</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://tetris.com/play-tetris')">
+    <img src="https://tetris.com/static/img/tetris-logo.png" alt="Tetris">
+    <h3>Tetris</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://pacman.platzh1rsch.ch')">
+    <img src="https://pacman.platzh1rsch.ch/assets/pacman.png" alt="Pac-Man Clone">
+    <h3>Pac-Man Clone</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://playsnake.org')">
+    <img src="https://playsnake.org/assets/snake.png" alt="Snake">
+    <h3>Snake</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://slither.io')">
+    <img src="https://slither.io/images/slither-icon.png" alt="Slither.io">
+    <h3>Slither.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://agar.io')">
+    <img src="https://agar.io/images/agar-logo.png" alt="Agar.io">
+    <h3>Agar.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://krunker.io')">
+    <img src="https://krunker.io/img/logo.png" alt="Krunker.io">
+    <h3>Krunker.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://bonk.io')">
+    <img src="https://bonk.io/img/bonk.png" alt="Bonk.io">
+    <h3>Bonk.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://zombsroyale.io')">
+    <img src="https://zombsroyale.io/assets/images/logo.png" alt="Zombs Royale">
+    <h3>Zombs Royale</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://diep.io')">
+    <img src="https://diep.io/images/diep_logo.png" alt="Diep.io">
+    <h3>Diep.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://mope.io')">
+    <img src="https://mope.io/assets/images/mope.png" alt="Mope.io">
+    <h3>Mope.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://littlealchemy.com')">
+    <img src="https://littlealchemy.com/img/logo.png" alt="Little Alchemy">
+    <h3>Little Alchemy</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://cookieclicker.com')">
+    <img src="https://cookieclicker.com/img/logo.png" alt="Cookie Clicker">
+    <h3>Cookie Clicker</h3>
+  </div>
+</div>
+
+<!-- Game iframe -->
+
+<div id="gameFrameContainer">
+  <button id="backBtn" onclick="backToSelection()">⬅ Back to Selection</button>
+  <iframe id="gameFrame" src=""></iframe>
+</div>
+
+<footer>🎮 All games are free and ad-free!</footer>
+
+<script>
+function searchGames() {
+  let input = document.getElementById('search').value.toLowerCase();
+  let games = document.getElementById('gameContainer').getElementsByClassName('game-card');
+  for (let i = 0; i < games.length; i++) {
+    let title = games[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+    games[i].style.display = title.includes(input) ? '' : 'none';
+  }
+}
+
+function openGame(url) {
+  document.getElementById('gameContainer').style.display = 'none';
+  document.getElementById('gameFrameContainer').style.display = 'block';
+  document.getElementById('backBtn').style.display = 'inline-block';
+  document.getElementById('gameFrame').src = url;
+}
+
+function backToSelection() {
+  document.getElementById('gameContainer').style.display = 'grid';
+  document.getElementById('gameFrameContainer').style.display = 'none';
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('gameFrame').src = '';
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sawyer's Secret Game Stash</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 1400% 1400%;
+    animation: rainbow 20s ease infinite;
+  }
+
+@keyframes rainbow {
+0% {background-position: 0% 50%;}
+50% {background-position: 100% 50%;}
+100% {background-position: 0% 50%;}
+}
+
+header {
+background: rgba(0,0,0,0.6);
+padding: 20px;
+text-align: center;
+font-size: 2em;
+font-weight: bold;
+letter-spacing: 2px;
+text-shadow: 2px 2px 20px #000;
+}
+
+.search-container {
+text-align: center;
+margin: 20px;
+}
+
+.search-container input {
+width: 80%;
+max-width: 500px;
+padding: 10px;
+border-radius: 8px;
+border: none;
+font-size: 1em;
+}
+
+.container {
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+gap: 20px;
+padding: 20px;
+}
+
+.game-card {
+background: rgba(0,0,0,0.6);
+border: 2px solid #fff;
+border-radius: 12px;
+overflow: hidden;
+text-align: center;
+cursor: pointer;
+transition: transform 0.3s, box-shadow 0.3s;
+box-shadow: 0 4px 10px rgba(255,255,255,0.2);
+}
+
+.game-card:hover {
+transform: scale(1.08);
+box-shadow: 0 0 25px #fff, 0 0 40px #000;
+}
+
+.game-card img {
+width: 100%;
+height: 150px;
+object-fit: cover;
+border-bottom: 2px solid #fff;
+}
+
+.game-card h3 {
+margin: 10px 0;
+}
+
+#gameFrameContainer {
+display: none;
+padding: 20px;
+text-align: center;
+}
+
+#gameFrameContainer iframe {
+width: 90%;
+height: 600px;
+border: none;
+border-radius: 12px;
+box-shadow: 0 0 20px #fff;
+}
+
+#backBtn {
+display: none;
+margin: 20px auto;
+padding: 10px 20px;
+font-size: 1em;
+cursor: pointer;
+background: #ff0055;
+border: none;
+border-radius: 8px;
+color: #fff;
+transition: transform 0.2s;
+}
+
+#backBtn:hover {
+transform: scale(1.05);
+}
+
+footer {
+text-align: center;
+padding: 15px;
+color: #fff;
+font-size: 0.9em;
+border-top: 1px solid #fff;
+text-shadow: 0 0 10px #000;
+} </style>
+
+</head>
+<body>
+
+<header>🎮 Sawyer's Secret Game Stash 🎮</header>
+
+<div class="search-container">
+  <input type="text" id="search" placeholder="Search games..." onkeyup="searchGames()">
+</div>
+
+<!-- Game Selection Page -->
+
+<div class="container" id="gameContainer">
+  <!-- Example Game Cards -->
+  <div class="game-card" onclick="openGame('https://chromedino.com')">
+    <img src="https://chromedino.com/assets/dino.png" alt="Dino Game">
+    <h3>Dino Game</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://flappybird.io')">
+    <img src="https://flappybird.io/flappy-bird.png" alt="Flappy Bird">
+    <h3>Flappy Bird</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://play2048.co')">
+    <img src="https://play2048.co/assets/images/2048-icon.png" alt="2048">
+    <h3>2048</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://tetris.com/play-tetris')">
+    <img src="https://tetris.com/static/img/tetris-logo.png" alt="Tetris">
+    <h3>Tetris</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://pacman.platzh1rsch.ch')">
+    <img src="https://pacman.platzh1rsch.ch/assets/pacman.png" alt="Pac-Man Clone">
+    <h3>Pac-Man Clone</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://playsnake.org')">
+    <img src="https://playsnake.org/assets/snake.png" alt="Snake">
+    <h3>Snake</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://slither.io')">
+    <img src="https://slither.io/images/slither-icon.png" alt="Slither.io">
+    <h3>Slither.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://agar.io')">
+    <img src="https://agar.io/images/agar-logo.png" alt="Agar.io">
+    <h3>Agar.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://krunker.io')">
+    <img src="https://krunker.io/img/logo.png" alt="Krunker.io">
+    <h3>Krunker.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://bonk.io')">
+    <img src="https://bonk.io/img/bonk.png" alt="Bonk.io">
+    <h3>Bonk.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://zombsroyale.io')">
+    <img src="https://zombsroyale.io/assets/images/logo.png" alt="Zombs Royale">
+    <h3>Zombs Royale</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://diep.io')">
+    <img src="https://diep.io/images/diep_logo.png" alt="Diep.io">
+    <h3>Diep.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://mope.io')">
+    <img src="https://mope.io/assets/images/mope.png" alt="Mope.io">
+    <h3>Mope.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://littlealchemy.com')">
+    <img src="https://littlealchemy.com/img/logo.png" alt="Little Alchemy">
+    <h3>Little Alchemy</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://cookieclicker.com')">
+    <img src="https://cookieclicker.com/img/logo.png" alt="Cookie Clicker">
+    <h3>Cookie Clicker</h3>
+  </div>
+</div>
+
+<!-- Game iframe -->
+
+<div id="gameFrameContainer">
+  <button id="backBtn" onclick="backToSelection()">⬅ Back to Selection</button>
+  <iframe id="gameFrame" src=""></iframe>
+</div>
+
+<footer>🎮 All games are free and ad-free!</footer>
+
+<script>
+function searchGames() {
+  let input = document.getElementById('search').value.toLowerCase();
+  let games = document.getElementById('gameContainer').getElementsByClassName('game-card');
+  for (let i = 0; i < games.length; i++) {
+    let title = games[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+    games[i].style.display = title.includes(input) ? '' : 'none';
+  }
+}
+
+function openGame(url) {
+  document.getElementById('gameContainer').style.display = 'none';
+  document.getElementById('gameFrameContainer').style.display = 'block';
+  document.getElementById('backBtn').style.display = 'inline-block';
+  document.getElementById('gameFrame').src = url;
+}
+
+function backToSelection() {
+  document.getElementById('gameContainer').style.display = 'grid';
+  document.getElementById('gameFrameContainer').style.display = 'none';
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('gameFrame').src = '';
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sawyer's Secret Game Stash</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 1400% 1400%;
+    animation: rainbow 20s ease infinite;
+  }
+
+@keyframes rainbow {
+0% {background-position: 0% 50%;}
+50% {background-position: 100% 50%;}
+100% {background-position: 0% 50%;}
+}
+
+header {
+background: rgba(0,0,0,0.6);
+padding: 20px;
+text-align: center;
+font-size: 2em;
+font-weight: bold;
+letter-spacing: 2px;
+text-shadow: 2px 2px 20px #000;
+}
+
+.search-container {
+text-align: center;
+margin: 20px;
+}
+
+.search-container input {
+width: 80%;
+max-width: 500px;
+padding: 10px;
+border-radius: 8px;
+border: none;
+font-size: 1em;
+}
+
+.container {
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+gap: 20px;
+padding: 20px;
+}
+
+.game-card {
+background: rgba(0,0,0,0.6);
+border: 2px solid #fff;
+border-radius: 12px;
+overflow: hidden;
+text-align: center;
+cursor: pointer;
+transition: transform 0.3s, box-shadow 0.3s;
+box-shadow: 0 4px 10px rgba(255,255,255,0.2);
+}
+
+.game-card:hover {
+transform: scale(1.08);
+box-shadow: 0 0 25px #fff, 0 0 40px #000;
+}
+
+.game-card img {
+width: 100%;
+height: 150px;
+object-fit: cover;
+border-bottom: 2px solid #fff;
+}
+
+.game-card h3 {
+margin: 10px 0;
+}
+
+#gameFrameContainer {
+display: none;
+padding: 20px;
+text-align: center;
+}
+
+#gameFrameContainer iframe {
+width: 90%;
+height: 600px;
+border: none;
+border-radius: 12px;
+box-shadow: 0 0 20px #fff;
+}
+
+#backBtn {
+display: none;
+margin: 20px auto;
+padding: 10px 20px;
+font-size: 1em;
+cursor: pointer;
+background: #ff0055;
+border: none;
+border-radius: 8px;
+color: #fff;
+transition: transform 0.2s;
+}
+
+#backBtn:hover {
+transform: scale(1.05);
+}
+
+footer {
+text-align: center;
+padding: 15px;
+color: #fff;
+font-size: 0.9em;
+border-top: 1px solid #fff;
+text-shadow: 0 0 10px #000;
+} </style>
+
+</head>
+<body>
+
+<header>🎮 Sawyer's Secret Game Stash 🎮</header>
+
+<div class="search-container">
+  <input type="text" id="search" placeholder="Search games..." onkeyup="searchGames()">
+</div>
+
+<!-- Game Selection Page -->
+
+<div class="container" id="gameContainer">
+  <!-- Example Game Cards -->
+  <div class="game-card" onclick="openGame('https://chromedino.com')">
+    <img src="https://chromedino.com/assets/dino.png" alt="Dino Game">
+    <h3>Dino Game</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://flappybird.io')">
+    <img src="https://flappybird.io/flappy-bird.png" alt="Flappy Bird">
+    <h3>Flappy Bird</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://play2048.co')">
+    <img src="https://play2048.co/assets/images/2048-icon.png" alt="2048">
+    <h3>2048</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://tetris.com/play-tetris')">
+    <img src="https://tetris.com/static/img/tetris-logo.png" alt="Tetris">
+    <h3>Tetris</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://pacman.platzh1rsch.ch')">
+    <img src="https://pacman.platzh1rsch.ch/assets/pacman.png" alt="Pac-Man Clone">
+    <h3>Pac-Man Clone</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://playsnake.org')">
+    <img src="https://playsnake.org/assets/snake.png" alt="Snake">
+    <h3>Snake</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://slither.io')">
+    <img src="https://slither.io/images/slither-icon.png" alt="Slither.io">
+    <h3>Slither.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://agar.io')">
+    <img src="https://agar.io/images/agar-logo.png" alt="Agar.io">
+    <h3>Agar.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://krunker.io')">
+    <img src="https://krunker.io/img/logo.png" alt="Krunker.io">
+    <h3>Krunker.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://bonk.io')">
+    <img src="https://bonk.io/img/bonk.png" alt="Bonk.io">
+    <h3>Bonk.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://zombsroyale.io')">
+    <img src="https://zombsroyale.io/assets/images/logo.png" alt="Zombs Royale">
+    <h3>Zombs Royale</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://diep.io')">
+    <img src="https://diep.io/images/diep_logo.png" alt="Diep.io">
+    <h3>Diep.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://mope.io')">
+    <img src="https://mope.io/assets/images/mope.png" alt="Mope.io">
+    <h3>Mope.io</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://littlealchemy.com')">
+    <img src="https://littlealchemy.com/img/logo.png" alt="Little Alchemy">
+    <h3>Little Alchemy</h3>
+  </div>
+
+  <div class="game-card" onclick="openGame('https://cookieclicker.com')">
+    <img src="https://cookieclicker.com/img/logo.png" alt="Cookie Clicker">
+    <h3>Cookie Clicker</h3>
+  </div>
+</div>
+
+<!-- Game iframe -->
+
+<div id="gameFrameContainer">
+  <button id="backBtn" onclick="backToSelection()">⬅ Back to Selection</button>
+  <iframe id="gameFrame" src=""></iframe>
+</div>
+
+<footer>🎮 All games are free and ad-free!</footer>
+
+<script>
+function searchGames() {
+  let input = document.getElementById('search').value.toLowerCase();
+  let games = document.getElementById('gameContainer').getElementsByClassName('game-card');
+  for (let i = 0; i < games.length; i++) {
+    let title = games[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+    games[i].style.display = title.includes(input) ? '' : 'none';
+  }
+}
+
+function openGame(url) {
+  document.getElementById('gameContainer').style.display = 'none';
+  document.getElementById('gameFrameContainer').style.display = 'block';
+  document.getElementById('backBtn').style.display = 'inline-block';
+  document.getElementById('gameFrame').src = url;
+}
+
+function backToSelection() {
+  document.getElementById('gameContainer').style.display = 'grid';
+  document.getElementById('gameFrameContainer').style.display = 'none';
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('gameFrame').src = '';
+}
+</script>
+
+</body>
+</html>
